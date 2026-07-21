@@ -1,0 +1,11 @@
+const { onRequest } = require("firebase-functions/v2/https");
+const admin = require("firebase-admin");
+
+admin.initializeApp();
+
+exports.testFunction = onRequest(async (req, res) => {
+  res.json({
+    success: true,
+    message: "Star Data Function is working!"
+  });
+});
