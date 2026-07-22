@@ -1,9 +1,25 @@
 const express = require("express");
+const admin = require("firebase-admin");
+
+const serviceAccount = require("/etc/secrets/serviceAccountKey.json");
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+});
 
 const app = express();
 
+app.use(express.json());
+
 app.get("/", (req, res) => {
-  res.send("StarData Backend is running!");
+  res.send("StarData Backend + Firebase is running!");
+});
+
+app.get("/test", (req, res) => {
+  res.json({
+    success: true,
+    message: "Firebase connected successfully"
+  });
 });
 
 const PORT = process.env.PORT || 3000;
